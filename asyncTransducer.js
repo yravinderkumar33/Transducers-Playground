@@ -1,20 +1,26 @@
-const axios = require('axios');
+const axios = require("axios");
 
 const apply = (acc, fn) => acc.then(fn);
 
-const compose = (...fns) => x => fns.reduce(apply, Promise.resolve(x));
+const compose = (...fns) => (x) => fns.reduce(apply, Promise.resolve(x));
 
-const  fetchUserName = async (username) => axios.get(`https://api.github.com/users/${username}`)
+const fetchUserName = async (username) =>
+  axios.get(`https://api.github.com/users/${username}`);
 
-const fetchKeyAsync = key => async (obj) => obj[key];
+const fetchKeyAsync = (key) => async (obj) => obj[key];
 
-const pipeline = compose(fetchUserName, fetchKeyAsync('data'), fetchKeyAsync('login'));
+const pipeline = compose(
+  fetchUserName,
+  fetchKeyAsync("data"),
+  fetchKeyAsync("login")
+);
 
-const result = pipeline('yravinderkumar33');
+const result = pipeline("yravinderkumar33");
 
 result
-.then(res => {
+  .then((res) => {
     console.log(res);
-}).catch(err => {
+  })
+  .catch((err) => {
     console.log(`sinlge catch block`);
-})
+  });
