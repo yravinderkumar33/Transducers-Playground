@@ -15,4 +15,6 @@ const result = pipeline('yravinderkumar33');
 result
 .then(res => {
     console.log(res);
+}).catch(err => {
+    console.log(`sinlge catch block`);
 })
